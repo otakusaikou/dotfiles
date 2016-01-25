@@ -31,6 +31,7 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'ervandew/supertab'
 
 " 括弧自動補完プラグイン
 NeoBundle 'jiangmiao/auto-pairs'
@@ -54,7 +55,10 @@ set viminfo='20,\"50
 " コマンド,検索履歴の上限値を50に限定
 set history=50
 
-" アンドゥファイル情報の保存先
+" ファイルを保存するときにアンドゥファイル情報を保存
+set undofile
+
+" アンドゥ情報の保存先
 if !isdirectory(expand('$HOME/.vim/tmp/undo'))
     call mkdir(expand('$HOME/.vim/tmp/undo'), "p")
 endif
@@ -69,6 +73,9 @@ set incsearch
 
 " 検索の時に大文字小文字を区別しない
 set ignorecase
+
+" 検索の結果をハイライト表示
+set hlsearch
 
 "----------インデント
 " タブ入力を複数の空白に置き換える
@@ -90,9 +97,6 @@ set shiftwidth=4
 set smarttab
 
 "----------その他
-" viとの互換性をとらない
-set nocompatible
-
 " コマンドラインのファイル名補完
 set wildmenu
 
@@ -165,15 +169,10 @@ set guioptions-=T
 
 "=====================エンコード======================
 " 改行コードの設定
-if has('unix')
-    set fileformat=unix
+set fileformat=unix
 
-    " 改行コード自動判別の順番
-    set fileformats=unix,dos,mac
-elseif has('win32')
-    set fileformat=dos
-    set fileformats=dos,unix,mac
-endif
+" 改行コード自動判別の順番
+set fileformats=unix,dos,mac
 
 " vim自身の文字コード,グローバルオプション
 set encoding=utf-8
