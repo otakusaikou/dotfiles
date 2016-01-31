@@ -15,7 +15,8 @@ call neobundle#begin(expand('$HOME/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " かっこいいステータスライン
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 
 " python PEP8コーディングスタイルチェックプラグイン
 NeoBundle 'nvie/vim-flake8'
