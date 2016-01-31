@@ -40,6 +40,9 @@ NeoBundle 'jiangmiao/auto-pairs'
 " アンドゥツリープラグイン
 NeoBundle 'sjl/gundo.vim'
 
+" コマンドを連続で入力するプラグイン
+NeoBundle 'kana/vim-submode'
+
 " カラーテーマ
 NeoBundle 'altercation/vim-colors-solarized'
 
@@ -98,9 +101,6 @@ set shiftwidth=4
 set smarttab
 
 "----------その他
-" viとの互換性をとらない
-set nocompatible
-
 " コマンドラインのファイル名補完
 set wildmenu
 
@@ -245,6 +245,23 @@ map <c-l> <c-w>l
 
 " 左のウィンドウに移動
 map <c-h> <c-w>h
+
+" 分割したウィンドウの拡大と縮小(プラグインvim-submodeが必要)
+" 分割ウィンドウの幅を増やす
+call submode#enter_with('winsize', 'n', '', '<C-w>L', '<C-w>>')
+call submode#map('winsize', 'n', '', 'L', '<C-w>>')
+
+" 分割ウィンドウの幅を減らす
+call submode#enter_with('winsize', 'n', '', '<C-w>H', '<C-w><')
+call submode#map('winsize', 'n', '', 'H', '<C-w><')
+
+" 分割ウィンドウの高さを増やす
+call submode#enter_with('winsize', 'n', '', '<C-w>K', '<C-w>-')
+call submode#map('winsize', 'n', '', 'K', '<C-w>-')
+
+" 分割ウィンドウの高さを減らす
+call submode#enter_with('winsize', 'n', '', '<C-w>J', '<C-w>+')
+call submode#map('winsize', 'n', '', 'J', '<C-w>+')
 
 " ディレクトリツリーを開く/閉じる
 map <Leader>n :NERDTreeToggle<CR>
