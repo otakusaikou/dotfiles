@@ -307,6 +307,10 @@ highlight link Flake8_Complexity WarningMsg
 highlight link Flake8_Naming     WarningMsg
 highlight link Flake8_PyFlake    WarningMsg
 
+"----------pyflakes-vim
+" pyflakes-vimのquickfix機能を無効化
+let g:pyflakes_use_quickfix = 0
+
 "----------vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
