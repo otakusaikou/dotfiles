@@ -290,6 +290,17 @@ map <Leader>rgc :e $MYGVIMRC<CR>
 " pythonスクリプトの実行
 autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python %<CR>
 
+" Altキーをターミナルのメタキーとして使う
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+" マッピングされたキー列の反応時間を50ミリ秒に短縮
+set timeout ttimeoutlen=50
+
 "================================================
 
 "====================プラグィン関係====================
