@@ -34,6 +34,9 @@ NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'ervandew/supertab'
 
+" Javaの自動補完プラグイン
+NeoBundle 'vim-scripts/javacomplete'
+
 " 括弧自動補完プラグイン
 NeoBundle 'jiangmiao/auto-pairs'
 
@@ -212,6 +215,9 @@ source $VIMRUNTIME/menu.vim
 " jjを押すと挿入モードから抜ける
 imap jj <esc>
 
+" オムニ補完を行う
+imap <Leader>c <c-x><c-o>
+
 " jjを押すとコマンドラインモードから抜ける
 cno jj <c-c>
 
@@ -290,6 +296,12 @@ map <Leader>rgc :e $MYGVIMRC<CR>
 " pythonスクリプトの実行
 autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python %<CR>
 
+" Javaプログラムをコンパイル
+autocmd FileType java :map <F8> :!javac %<CR>
+
+" コンパイルされたJavaプログラムを実行
+autocmd FileType java :map <F9> :!java %<<CR>
+
 " Altキーをターミナルのメタキーとして使う
 let c='a'
 while c <= 'z'
@@ -328,5 +340,10 @@ let g:airline_powerline_fonts=1
 
 " airlineのテーマ
 let g:airline_theme='base16'
+
+"----------javacomplete
+" Javaに適用したオムニ補完プラグインの設定
+autocmd FileType java :setlocal omnifunc=javacomplete#Complete
+autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
 "================================================
