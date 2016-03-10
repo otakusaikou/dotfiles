@@ -302,6 +302,12 @@ autocmd FileType java :map <F8> :!javac %<CR>
 " コンパイルされたJavaプログラムを実行
 autocmd FileType java :map <F9> :!java %<<CR>
 
+" Cプログラムをコンパイル
+autocmd FileType c :map <F8> :!make clean<CR>:!make<CR>
+
+" コンパイルされたCプログラムを実行
+autocmd FileType c :map <F9> :!./%<<CR>
+
 " Altキーをターミナルのメタキーとして使う
 let c='a'
 while c <= 'z'
