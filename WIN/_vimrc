@@ -174,6 +174,9 @@ set fileencodings=utf-8,sjis,big5,gbk,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms
 "================================================
 
 "==================キーボードショートカット==================
+" Leaderキー
+let mapleader=";"
+
 " jjを押すと挿入モードから抜ける
 imap jj <esc>
 
@@ -182,9 +185,6 @@ imap <Leader>c <c-x><c-o>
 
 " jjを押すとコマンドラインモードから抜ける
 cno jj <c-c>
-
-" Leaderキー
-let mapleader=";"
 
 " 行頭、行末移動
 nmap <Leader>b 0

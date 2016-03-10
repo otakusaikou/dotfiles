@@ -212,6 +212,9 @@ source $VIMRUNTIME/menu.vim
 "================================================
 
 "==================キーボードショートカット==================
+" Leaderキー
+let mapleader=";"
+
 " jjを押すと挿入モードから抜ける
 imap jj <esc>
 
@@ -220,9 +223,6 @@ imap <Leader>c <c-x><c-o>
 
 " jjを押すとコマンドラインモードから抜ける
 cno jj <c-c>
-
-" Leaderキー
-let mapleader=";"
 
 " 行頭、行末移動
 nmap <Leader>b 0
