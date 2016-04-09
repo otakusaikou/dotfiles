@@ -28,13 +28,9 @@ NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'scrooloose/nerdtree'
 
 " 入力自動補完プラグイン
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'ervandew/supertab'
-
-" Javaの自動補完プラグイン
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'vim-scripts/javacomplete'
 
 " 括弧自動補完プラグイン
@@ -329,10 +325,5 @@ let g:airline#extensions#tabline#enabled=1
 
 " airlineのテーマ
 let g:airline_theme='base16'
-
-"----------javacomplete
-" Javaに適用したオムニ補完プラグインの設定
-autocmd FileType java :setlocal omnifunc=javacomplete#Complete
-autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
 "================================================

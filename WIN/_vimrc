@@ -28,13 +28,9 @@ NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'scrooloose/nerdtree'
 
 " 入力自動補完プラグイン
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'ervandew/supertab'
-
-" Javaの自動補完プラグイン
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'vim-scripts/javacomplete'
 
 " 括弧自動補完プラグイン
@@ -298,9 +294,67 @@ let g:airline#extensions#tabline#enabled=1
 " airlineのテーマ
 let g:airline_theme='base16'
 
-"----------javacomplete
-" Javaに適用したオムニ補完プラグインの設定
-autocmd FileType java :setlocal omnifunc=javacomplete#Complete
-autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
+"----------neocomplete
+" neocompleteを有効化
+let g:neocomplete#enable_at_startup = 1
+
+" 大文字と小文字を区別しない
+let g:neocomplete#enable_smart_case = 1
+
+" シンタックスをキャッシュするときの最小文字数を3にする
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" 辞書を指定する
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" 日本語のキーワードパターンを無視
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" 自動補完のキーボードショートカット
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Enterキーでポップアップメニューを閉じ、改行する
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+
+" タブキーでメニューの項目間を移動
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Ctrl+hあるいは後退キーでポップアップメニューを閉じ、1文字を削除
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" オムニ補完の設定
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete completeopt-=preview
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
+
+"----------neosnippet
+" Ctrl+kキーで自動補完
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" タブキーで自動補完
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" 暗黙化された文字の対応に関する設定
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 "================================================
