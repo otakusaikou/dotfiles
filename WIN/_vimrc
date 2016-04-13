@@ -32,6 +32,7 @@ NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'honza/vim-snippets'
 
 " 括弧自動補完プラグイン
 NeoBundle 'jiangmiao/auto-pairs'
@@ -356,5 +357,12 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+"----------vim-snippets
+" snipMateとの互換性を有効化
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" snipMate用スニペット集の場所を指定
+let g:neosnippet#snippets_directory=expand('$HOME/.vim/bundle/vim-snippets/snippets')
 
 "================================================

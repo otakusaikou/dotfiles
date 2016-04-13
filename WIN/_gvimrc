@@ -32,6 +32,7 @@ NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'honza/vim-snippets'
 
 " 括弧自動補完プラグイン
 NeoBundle 'jiangmiao/auto-pairs'
@@ -172,10 +173,10 @@ set guioptions-=T
 
 "=====================エンコード======================
 " 改行コードの設定
-set fileformat=unix
+set fileformat=dos
 
 " 改行コード自動判別の順番
-set fileformats=unix,dos,mac
+set fileformats=dos,unix,mac
 
 " vim自身の文字コード,グローバルオプション
 set encoding=utf-8
