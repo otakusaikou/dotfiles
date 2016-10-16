@@ -28,11 +28,11 @@ NeoBundle 'kevinw/pyflakes-vim'
 NeoBundle 'scrooloose/nerdtree'
 
 " 入力自動補完プラグイン
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'honza/vim-snippets'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'davidhalter/jedi-vim'
 
 " 括弧自動補完プラグイン
 NeoBundle 'jiangmiao/auto-pairs'
@@ -64,7 +64,7 @@ set undofile
 
 " アンドゥ情報の保存先
 if !isdirectory(expand('$HOME/.vim/tmp/undo'))
-    call mkdir(expand('$HOME/.vim/tmp/undo'), "p")
+    call mkdir(expand('$HOME/.vim/tmp/undo'), 'p')
 endif
 set undodir=$HOME/.vim/tmp/undo
 
@@ -210,7 +210,7 @@ source $VIMRUNTIME/menu.vim
 
 "==================キーボードショートカット==================
 " Leaderキー
-let mapleader=";"
+let mapleader=';'
 
 " jjを押すと挿入モードから抜ける
 imap jj <esc>
@@ -300,10 +300,16 @@ autocmd FileType java :map <F8> :!javac %<CR>
 autocmd FileType java :map <F9> :!java %<<CR>
 
 " Cプログラムをコンパイル
-autocmd FileType c :map <F8> :!make clean<CR>:!make<CR>
+autocmd FileType c,cpp :map <F8> :!make clean<CR>:!make %<<CR>
 
 " コンパイルされたCプログラムを実行
-autocmd FileType c :map <F9> :!./%<<CR>
+autocmd FileType c,cpp :map <F9> :!./%<<CR>
+
+" Cプログラムをコンパイル
+"autocmd FileType cpp :map <F8> :!make clean<CR>:!make %<<CR>
+
+" コンパイルされたCプログラムを実行
+"autocmd FileType cpp :map <F9> :!./%<<CR>
 
 " Altキーをターミナルのメタキーとして使う
 let c='a'
@@ -344,74 +350,61 @@ let g:airline_powerline_fonts=1
 " airlineのテーマ
 let g:airline_theme='base16'
 
-"----------neocomplete
-" neocompleteを有効化
-let g:neocomplete#enable_at_startup = 1
+"----------YouCompleteMe
+" YouCompleteMe初期設定スクリプトを読み込む
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
-" 大文字と小文字を区別しない
-let g:neocomplete#enable_smart_case = 1
+" 初期設定スクリプト適用前の確認を無効化
+let g:ycm_confirm_extra_conf=0
 
-" シンタックスをキャッシュするときの最小文字数を3にする
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Ctrl+n or Ctrl+pキーでポップアップメニューを次の候補に進む
+let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>']
 
-" 辞書を指定する
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+" Ctrl+p or Ctrl+kキーでポップアップメニューを前の候補に戻る
+let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>']
 
-" 日本語のキーワードパターンを無視
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" シンタックスをキャッシュするときの最小文字数を2にする
+let g:ycm_min_num_of_chars_for_completion=2
 
-" 自動補完のキーボードショートカット
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" オムニ補完のキャッシュ機能を無効化
+let g:ycm_cache_omnifunc=0
 
-" Enterキーでポップアップメニューを閉じ、改行する
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
+" 識別子補完機能を有効化
+let g:ycm_seed_identifiers_with_syntax=1
 
-" タブキーでメニューの項目間を移動
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" 左側のガーターエリアを隠す
+let g:ycm_enable_diagnostic_signs=0
 
-" Ctrl+hあるいは後退キーでポップアップメニューを閉じ、1文字を削除
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" オムニ補完の設定
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete completeopt-=preview
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
-
-"----------neosnippet
-" Ctrl+kキーで自動補完
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" タブキーで自動補完
-imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" 暗黙化された文字の対応に関する設定
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"----------Ultisnips
+" タブキーで補完のコンテンツを展開
+let g:UltiSnipsExpandTrigger='<tab>'
 
 "----------vim-snippets
 " snipMateとの互換性を有効化
-let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#enable_snipmate_compatibility = 1
 
 " snipMate用スニペット集の場所を指定
 let g:neosnippet#snippets_directory=expand('$HOME/.vim/bundle/vim-snippets/snippets')
+
+"----------jedi-vim
+" Pydocを表示
+let g:jedi#documentation_command = 'K'
+
+" 変数の宣言場所へジャンプ
+let g:jedi#goto_assignments_command = '<leader>g'
+
+" . で補完が始まるという設定を解除
+let g:jedi#popup_on_dot = 0
+
+" 使われてないコマンドを無効化
+let g:jedi#goto_definitions_command = ''
+let g:jedi#goto_command = ''
+let g:jedi#usages_command = ''
+
+" タブキーで次の補完候補に進む(コンフリクトあり、効かない)
+let g:jedi#use_tabs_not_buffers = 1
+
+" ポップアップを表示しない
+autocmd FileType python setlocal completeopt-=preview
 
 "================================================
