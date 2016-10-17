@@ -405,6 +405,6 @@ let g:jedi#usages_command = ''
 let g:jedi#use_tabs_not_buffers = 1
 
 " ポップアップを表示しない
-autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python,c,cpp setlocal completeopt-=preview
 
 "================================================
