@@ -372,6 +372,9 @@ let g:ycm_cache_omnifunc=0
 " 識別子補完機能を有効化
 let g:ycm_seed_identifiers_with_syntax=1
 
+" コメント内の自動補完を有効化
+let g:ycm_complete_in_comments = 1
+
 " 左側のガーターエリアを隠す
 let g:ycm_enable_diagnostic_signs=0
 
