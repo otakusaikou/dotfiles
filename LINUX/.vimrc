@@ -299,17 +299,11 @@ autocmd FileType java :map <F8> :!javac %<CR>
 " コンパイルされたJavaプログラムを実行
 autocmd FileType java :map <F9> :!java %<<CR>
 
-" Cプログラムをコンパイル
+" C/C++プログラムをコンパイル
 autocmd FileType c,cpp :map <F8> :!make clean<CR>:!make %<<CR>
 
-" コンパイルされたCプログラムを実行
+" コンパイルされたC/C++プログラムを実行
 autocmd FileType c,cpp :map <F9> :!./%<<CR>
-
-" Cプログラムをコンパイル
-"autocmd FileType cpp :map <F8> :!make clean<CR>:!make %<<CR>
-
-" コンパイルされたCプログラムを実行
-"autocmd FileType cpp :map <F9> :!./%<<CR>
 
 " Altキーをターミナルのメタキーとして使う
 let c='a'
