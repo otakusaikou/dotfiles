@@ -71,6 +71,9 @@ set undodir=$HOME/.vim/tmp/undo
 " バックアップファイルを作らない
 set nobackup
 
+" 前回終了したカーソル行に移動
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
+
 "----------検索関係
 " 一文字入力するたびに一致する候補を絞りこんでいく
 set incsearch
