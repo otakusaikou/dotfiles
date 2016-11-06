@@ -19,7 +19,7 @@ sudo ./fonts/install.sh
 
 # Vim configuration file
 git clone http://github.com/otakusaikou/vimrc
-cp vimrc/LINUX/.vimrc ~
+cp vimrc/UNIX/.vimrc ~
 
 # For vim plugins
 mkdir ~/.vim
