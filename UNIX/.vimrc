@@ -115,7 +115,12 @@ set visualbell t_vb=
 set noerrorbells
 
 " ヤンクしたテキストをクリップボードにコピー
-set clipboard=unnamedplus,autoselect
+let s:uname = system("uname -s")
+if s:uname == "Darwin\n"
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus,autoselect
+endif
 
 " 保存されていないファイルがあるときは終了前に保存確認
 " set confirm
