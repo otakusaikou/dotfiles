@@ -18,6 +18,7 @@ git clone https://github.com/powerline/fonts
 sudo ./fonts/install.sh
 
 # Vim configuration file
+touch ~/.viminfo
 git clone http://github.com/otakusaikou/vimrc
 cp vimrc/UNIX/.vimrc ~
 
