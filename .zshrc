@@ -16,13 +16,21 @@ autoload -Uz colors
 colors
 
 # プロンプト関係
+# 特殊文字
+ARROW=$'\ue0b0'
+ARROW2=$'\u2b81'
+BRANCH=$'\ue0a0'
+CHECK=$'\u2714'
+CROSS=$'\u2718'
+LIGHTNING=$'\u26a1'
+
 autoload vcs_info
 zstyle ":vcs_info:*" enable git
 zstyle ":vcs_info:git:*" check-for-changes true
-zstyle ":vcs_info:git:*" formats "⭠ %r ⮁ %b%u%c"
-zstyle ":vcs_info:git:*" actionformats "⭠ %r ⮁ %b%u%c ⮁ %a"
-zstyle ":vcs_info:git:*" unstagedstr " ⮁ Unstaged"
-zstyle ":vcs_info:git:*" stagedstr " ⮁ Staged"
+zstyle ":vcs_info:git:*" formats "$BRANCH %r $ARROW2 %b%u%c"
+zstyle ":vcs_info:git:*" actionformats "$BRANCH %r $ARROW2 %b%u%c $ARROW2 %a"
+zstyle ":vcs_info:git:*" unstagedstr " $ARROW2 Unstaged"
+zstyle ":vcs_info:git:*" stagedstr " $ARROW2 Staged"
 
 # プロンプト変数の中の変数参照を有効化
 setopt prompt_subst
@@ -44,7 +52,7 @@ git_info_pull(){
         local head_rev="$(git rev-parse HEAD)"
         local origin_rev="$(git rev-parse origin/$current_branch)"
         if [ "$head_rev" != "$origin_rev" ] && [ "$(git_info_push)" = "" ]; then
-                echo " ⮁ Can Be Pulled"
+                echo " $ARROW2 Can Be Pulled"
         fi
     fi
 }
@@ -54,7 +62,7 @@ git_info_push(){
         local current_branch="$(git rev-parse --abbrev-ref HEAD)"
         local push_count=$(git rev-list origin/"$current_branch".."$current_branch" 2>/dev/null | wc -l | sed 's/  *//g')
         if [ "$push_count" -gt 0 ]; then
-            echo " ⮁ Can Be Pushed($push_count)"
+            echo " $ARROW2 Can Be Pushed($push_count)"
         fi
     fi
 }
@@ -76,16 +84,16 @@ function update_git_info() {
             BG_COLOR="088"
             FG_COLOR="255"
         fi
-        echo "%K{$BG_COLOR}%F{026}⮀%f%F{$FG_COLOR} $_vcs_info$_git_info_push$_git_info_pull %f%k%K{002}%F{$BG_COLOR}⮀%f%k"
+        echo "%K{$BG_COLOR}%F{026}$ARROW%f%F{$FG_COLOR} $_vcs_info$_git_info_push$_git_info_pull %f%k%K{002}%F{$BG_COLOR}$ARROW%f%k"
     else
-       echo "%K{002}%F{026}⮀%f%k"
+       echo "%K{002}%F{026}$ARROW%f%k"
     fi
 }
 
-PROMPT_HOST="%K{026}%{%F{000}%}[ %f%(?.%{%F{002}%}✔.%{%F{088}%}✘)%f %F{000}%n ] %f%k"
-PROMPT_DIR="%K{002}%F{000} %~ %f%k%K{000}%F{002}⮀%k%f"
-PROMPT_SU='%(!.%F{220}%f ⚡. )'
-PROMPT_NL="%K{026} %F{000}$%f %k%K{000}%F{026}⮀%f%k"
+PROMPT_HOST="%K{026}%{%F{000}%}[ %f%(?.%{%F{002}%}$CHECK.%{%F{088}%}$CROSS)%f %F{000}%n ] %f%k"
+PROMPT_DIR="%K{002}%F{000} %~ %f%k%K{000}%F{002}$ARROW%k%f"
+PROMPT_SU="%(!.%F{220}%f $LIGHTNING . )"
+PROMPT_NL="%K{026} %F{000}$%f %k%K{000}%F{026}$ARROW%f%k"
 PROMPT='
 $PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
 $PROMPT_NL '
