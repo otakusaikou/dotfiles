@@ -1,3 +1,4 @@
+### 基本的な設定
 # デフォルト自動補完機能を有効化
 autoload -U compinit
 compinit
@@ -15,7 +16,7 @@ setopt correct
 autoload -Uz colors
 colors
 
-# プロンプト関係
+### プロンプト関係
 # 特殊文字
 ARROW=$'\ue0b0'
 ARROW2=$'\ue0b1'
@@ -99,7 +100,7 @@ $PROMPT_HOST$(update_git_info)$PROMPT_DIR$PROMPT_SU
 $PROMPT_NL '
 SPROMPT='${WHITE}%r is correct? [n,y,a,e]: %{$reset_color%}'
 
-# tmux関係
+### tmux関係
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
 function is_screen_running() { [ ! -z "$STY" ]; }
@@ -162,14 +163,18 @@ function tmux_automatically_attach_session()
 }
 tmux_automatically_attach_session
 
-# Added by Anaconda2 4.2.0 installer
-#export PATH="/Users/otakusaikou/anaconda2/bin:$PATH"
-
 # Aliases
-
-# For ls
-alias l='ls -CF'
+if is_osx; then
+    alias ls='ls -G'
+else
+    alias ls='ls --color=auto'
+fi
 alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --colour=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
-# For memory cleaner
-alias clearcache='sudo /usr/bin/clearcache.sh'
+# Added by Anaconda2 4.2.0 installer
+# export PATH="$HOME/anaconda2/bin:$PATH";
