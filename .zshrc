@@ -18,7 +18,7 @@ colors
 # プロンプト関係
 # 特殊文字
 ARROW=$'\ue0b0'
-ARROW2=$'\u2b81'
+ARROW2=$'\ue0b1'
 BRANCH=$'\ue0a0'
 CHECK=$'\u2714'
 CROSS=$'\u2718'
