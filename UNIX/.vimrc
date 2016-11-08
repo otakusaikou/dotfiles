@@ -38,7 +38,7 @@ NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'jiangmiao/auto-pairs'
 
 " アンドゥツリープラグイン
-NeoBundle 'sjl/gundo.vim'
+NeoBundle 'mbbill/undotree'
 
 " コマンドを連続で入力するプラグイン
 NeoBundle 'kana/vim-submode'
@@ -278,7 +278,7 @@ call submode#map('winsize', 'n', '', 'J', '<C-w>+')
 map <Leader>n :NERDTreeToggle<CR>
 
 " アンドゥツリーを開く/閉じる
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 
 " 次のバッファに切り替える
 map <Leader>a :bn<cr>
