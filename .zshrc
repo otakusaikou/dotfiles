@@ -136,13 +136,13 @@ function tmux_automatically_attach_session()
                 echo -n "Tmux: attach? (y/N/num) "
                 read
                 if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then
-                    tmux attach-session
+                    tmux attach-session && exit 0;
                     if [ $? -eq 0 ]; then
                         echo "$(tmux -V) attached session"
                         return 0
                     fi
                 elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
-                    tmux attach -t "$REPLY"
+                    tmux attach -t "$REPLY" && exit 0;
                     if [ $? -eq 0 ]; then
                         echo "$(tmux -V) attached session"
                         return 0
