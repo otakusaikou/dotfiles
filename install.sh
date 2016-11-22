@@ -6,9 +6,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt update
     sudo apt install vim
     sudo apt-get install vim vim-gnome vim-gtk python-flake8 pep8 pyflakes git cmake tmux zsh build-essential python2.7-dev
+    sudo pip install pyopenssl -U
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install vim flake8 git cmake tmux zsh reattach-to-user-namespace
+    pip install pyopenssl -U
 fi
 
 # For tmux and zsh
