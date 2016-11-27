@@ -405,6 +405,7 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#goto_definitions_command = ''
 let g:jedi#goto_command = ''
 let g:jedi#usages_command = ''
+let g:jedi#rename_command = ''
 
 " タブキーで次の補完候補に進む(コンフリクトあり、効かない)
 let g:jedi#use_tabs_not_buffers = 1
