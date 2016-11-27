@@ -381,8 +381,29 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_enable_diagnostic_signs=0
 
 "----------Ultisnips
-" タブキーで補完のコンテンツを展開
-let g:UltiSnipsExpandTrigger='<tab>'
+" YCMとの衝突を解決
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        " ポップアップメニューが開いていない時、ポップアップメニューを開き、次の候補に進む
+        if pumvisible()
+            return "\<C-n>"
+        " ポップアップが開いていたら次の補完候補に進む
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" Ultisnipのキーバインド
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "----------vim-snippets
 " snipMateとの互換性を有効化
