@@ -1,10 +1,8 @@
 #!/bin/bash
-# Install required tools
+# Vimのアプグレード & 必要なパッケージのインストール
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # Install the latest vim
     sudo add-apt-repository ppa:jonathonf/vim
     sudo apt update
-    sudo apt install vim
     sudo apt-get install vim vim-gnome vim-gtk python-flake8 pep8 pyflakes git cmake tmux zsh build-essential python2.7-dev curl
     sudo pip install pyopenssl -U
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -13,10 +11,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     pip install pyopenssl -U
 fi
 
-# Define the installation directory for dein plugin manager
+# プラグインマネージャdeinのインストール先
 DEIN_HOME=~/.vim/dein
 
-# For tmux and zsh
+# TmuxとZshの設定ファイルをホームディレクトリにコピー
 chsh -s /bin/zsh
 cp .tmux.conf ~
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -24,28 +22,31 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 cp .zshrc ~
 
-# Install fonts for powerline plugin
+# VimプラグインPowerline用のフォント
 git clone https://github.com/powerline/fonts
 sudo ./fonts/install.sh
 
-# Vim configuration file
+# Vim設定ファイルをコピー
 touch ~/.viminfo
 git clone http://github.com/otakusaikou/vimrc
 cp vimrc/UNIX/.vimrc ~
 
-# For vim plugins
+# Vimプラグインのインストール
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh $DEIN_HOME
 vim "+call dein#install()"
 cp vimrc/snippets/*.snippets $DEIN_HOME/repos/github.com/honza/vim-snippets/snippets
 
-# For YCM
+# VimプラグインYouCompleteMeのインストール
 cd $DEIN_HOME/repos/github.com/Valloric/YouCompleteMe
 ./install.py --clang-completer
 vim "+call dein#update()"
 cd -
 
-# Remove unused files
+# 不要ファイルを削除
 sudo rm -r vimrc fonts installer.sh
 
-# Finally you should open terminal and apply appropiate font styles that were installed previously
+# P.S. 
+# PowerlineとZshのテーマの適用にはターミナルの表示フォントをPowerline専用フォントに変える必要があります
+# また、メタキーを正しく動作させるにはメニューアクセスのショートカットキーを無効に(LINUX)、
+# あるいはメタキーとしての機能を有効にしてください(macOS)
