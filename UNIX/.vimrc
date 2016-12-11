@@ -5,48 +5,48 @@ if has('vim_starting')
         set nocompatible
     endif
 
-    " NeoBundleの位置
-    set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+    " Deinの位置
+    set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 endif
 
-call neobundle#begin(expand('$HOME/.vim/bundle'))
+call dein#begin(expand('$HOME/.vim/dein'))
 
-" NeoBundleの自身をプラグイン管理対象にする
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Deinをプラグイン管理対象にする
+call dein#add('Shougo/dein.vim')
 
 " かっこいいステータスライン
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 
 " python PEP8コーディングスタイルチェックプラグイン
-NeoBundle 'nvie/vim-flake8'
+call dein#add('nvie/vim-flake8')
 
 " 構文エラーをチェックするプラグイン
-NeoBundle 'kevinw/pyflakes-vim'
+call dein#add('kevinw/pyflakes-vim')
 
 " ディレクトリツリーを表示するプラグイン
-NeoBundle 'scrooloose/nerdtree'
+call dein#add('scrooloose/nerdtree')
 
 " 入力自動補完プラグイン
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'vim-scripts/javacomplete'
-NeoBundle 'davidhalter/jedi-vim'
+call dein#add('Valloric/YouCompleteMe')
+call dein#add('honza/vim-snippets')
+call dein#add('SirVer/ultisnips')
+call dein#add('vim-scripts/javacomplete')
+call dein#add('davidhalter/jedi-vim')
 
 " 括弧自動補完プラグイン
-NeoBundle 'jiangmiao/auto-pairs'
+call dein#add('jiangmiao/auto-pairs')
 
 " アンドゥツリープラグイン
-NeoBundle 'mbbill/undotree'
+call dein#add('mbbill/undotree')
 
 " コマンドを連続で入力するプラグイン
-NeoBundle 'kana/vim-submode'
+call dein#add('kana/vim-submode')
 
 " カラーテーマ
-NeoBundle 'altercation/vim-colors-solarized'
+call dein#add('altercation/vim-colors-solarized')
 
-call neobundle#end()
+call dein#end()
 
 " ファイルタイプの対応のプラグイン、インデント設定を自動で検出し、読み込むようにする
 filetype plugin indent on
@@ -354,7 +354,7 @@ let g:airline_theme='base16'
 
 "----------YouCompleteMe
 " YouCompleteMe初期設定スクリプトを読み込む
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/dein/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " 初期設定スクリプト適用前の確認を無効化
 let g:ycm_confirm_extra_conf=0
@@ -410,7 +410,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "let g:neosnippet#enable_snipmate_compatibility = 1
 
 " snipMate用スニペット集の場所を指定
-let g:neosnippet#snippets_directory=expand('$HOME/.vim/bundle/vim-snippets/snippets')
+let g:neosnippet#snippets_directory=expand('$HOME/.vim/dein/repos/github.com/honza/vim-snippets/snippets')
 
 "----------jedi-vim
 " Pydocを表示
