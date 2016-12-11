@@ -115,7 +115,7 @@ set visualbell t_vb=
 set noerrorbells
 
 " ヤンクしたテキストをクリップボードにコピー
-let s:uname = system("uname -s")
+let s:uname=system("uname -s")
 if s:uname == "Darwin\n"
     set clipboard=unnamed
 else
@@ -318,7 +318,7 @@ let c='a'
 while c <= 'z'
   exec "set <A-".c.">=\e".c
   exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
+  let c=nr2char(1+char2nr(c))
 endw
 
 " マッピングされたキー列の反応時間を50ミリ秒に短縮
@@ -343,7 +343,7 @@ highlight link Flake8_PyFlake    WarningMsg
 
 "----------pyflakes-vim
 " pyflakes-vimのquickfix機能を無効化
-let g:pyflakes_use_quickfix = 0
+let g:pyflakes_use_quickfix=0
 
 "----------vim-airline
 let g:airline#extensions#tabline#enabled=1
@@ -354,16 +354,16 @@ let g:airline_theme='base16'
 
 "----------YouCompleteMe
 " YouCompleteMe初期設定スクリプトを読み込む
-let g:ycm_global_ycm_extra_conf = '~/.vim/dein/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf=expand('$HOME/.vim/dein/repos/github.com/Valloric/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py')
 
 " 初期設定スクリプト適用前の確認を無効化
 let g:ycm_confirm_extra_conf=0
 
 " Ctrl+n or Ctrl+pキーでポップアップメニューを次の候補に進む
-let g:ycm_key_list_select_completion = ['<C-n>', '<C-j>']
+let g:ycm_key_list_select_completion=['<C-n>', '<C-j>']
 
 " Ctrl+p or Ctrl+kキーでポップアップメニューを前の候補に戻る
-let g:ycm_key_list_previous_completion = ['<C-p>', '<C-k>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<C-k>']
 
 " シンタックスをキャッシュするときの最小文字数を2にする
 let g:ycm_min_num_of_chars_for_completion=2
@@ -375,7 +375,7 @@ let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
 
 " コメント内の自動補完を有効化
-let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_comments=1
 
 " 左側のガーターエリアを隠す
 let g:ycm_enable_diagnostic_signs=0
@@ -401,35 +401,35 @@ endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 " Ultisnipのキーバインド
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "----------vim-snippets
 " snipMateとの互換性を有効化
-"let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#enable_snipmate_compatibility=1
 
 " snipMate用スニペット集の場所を指定
 let g:neosnippet#snippets_directory=expand('$HOME/.vim/dein/repos/github.com/honza/vim-snippets/snippets')
 
 "----------jedi-vim
 " Pydocを表示
-let g:jedi#documentation_command = 'K'
+let g:jedi#documentation_command='K'
 
 " 変数の宣言場所へジャンプ
-let g:jedi#goto_assignments_command = '<leader>g'
+let g:jedi#goto_assignments_command='<leader>g'
 
 " . で補完が始まるという設定を解除
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot=0
 
 " 使われてないコマンドを無効化
-let g:jedi#goto_definitions_command = ''
-let g:jedi#goto_command = ''
-let g:jedi#usages_command = ''
-let g:jedi#rename_command = ''
+let g:jedi#goto_definitions_command=''
+let g:jedi#goto_command=''
+let g:jedi#usages_command=''
+let g:jedi#rename_command=''
 
 " タブキーで次の補完候補に進む(コンフリクトあり、効かない)
-let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#use_tabs_not_buffers=1
 
 " ポップアップを表示しない
 autocmd FileType python,c,cpp setlocal completeopt-=preview
