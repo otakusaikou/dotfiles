@@ -1,9 +1,8 @@
 Otakusaikou自作のvim設定ファイル
 ==========
 
-##このリポジトリについて
-このリポジトリは, 自分用のvim設定ファイルです。  
-LINUX/macOSユーザーはこの[Otakusaikouのdotfiles](https://github.com/otakusaikou/dotfiles)で気軽にvim環境を整えてください。  
+##設定ファイルの適用について
+LINUX/macOSユーザーは[dotfiles](https://github.com/otakusaikou/dotfiles)で気軽にvim環境を整えてください。  
 Windowsユーザーのためにこの設定ファイルの適用に関する注意ポイントを並べましたので下記をご参考ください。 
 
 1.Windows環境では, GVim、git、neobundle.vimが必要なので、先にそれらのパッケージ/プラグインをインストールして置かなければ先に進めません。 詳しいインストール手順はこのリンクを参考してください: [vim windows 環境設定](http://sawasawato.github.io/blog/2014/04/10/vim/)  
