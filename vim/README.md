@@ -1,8 +1,7 @@
 Otakusaikou自作のvim設定ファイル
 ==========
 
-##このリポジトリについて
-このリポジトリは, 自分用のvim設定ファイルです。  
+##設定ファイルの適用について
 LINUX/macOSユーザーはこの[Otakusaikouのdotfiles](https://github.com/otakusaikou/dotfiles)で気軽にvim環境を整えてください。  
 Windowsユーザーのためにこの設定ファイルの適用に関する注意ポイントを並べましたので下記をご参考ください。 
 
