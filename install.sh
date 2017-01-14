@@ -16,11 +16,11 @@ DEIN_HOME=~/.vim/dein
 
 # TmuxとZshの設定ファイルをホームディレクトリにコピー
 chsh -s /bin/zsh
-cp .tmux.conf ~
+cp ./tmux/.tmux.conf ~
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    cp .tmux-osx.conf ~
+    cp ./tmux/.tmux-osx.conf ~
 fi
-cp .zshrc ~
+cp ./zsh/.zshrc ~
 
 # VimプラグインPowerline用のフォント
 git clone https://github.com/powerline/fonts
@@ -46,7 +46,7 @@ cd -
 # 不要ファイルを削除
 sudo rm -r vimrc fonts installer.sh
 
-# P.S. 
+# P.S.
 # PowerlineとZshのテーマの適用にはターミナルの表示フォントをPowerline専用フォントに変える必要があります
 # また、メタキーを正しく動作させるにはメニューアクセスのショートカットキーを無効に(LINUX)、
 # あるいはメタキーとしての機能を有効にしてください(macOS)
