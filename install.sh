@@ -28,14 +28,13 @@ sudo ./fonts/install.sh
 
 # Vim設定ファイルをコピー
 touch ~/.viminfo
-git clone http://github.com/otakusaikou/vimrc
-cp vimrc/UNIX/.vimrc ~
+cp ./vim/UNIX/.vimrc ~
 
 # Vimプラグインのインストール
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh $DEIN_HOME
 vim "+call dein#install()"
-cp vimrc/snippets/*.snippets $DEIN_HOME/repos/github.com/honza/vim-snippets/snippets
+cp ./vim/snippets/*.snippets $DEIN_HOME/repos/github.com/honza/vim-snippets/snippets
 
 # VimプラグインYouCompleteMeのインストール
 cd $DEIN_HOME/repos/github.com/Valloric/YouCompleteMe
@@ -44,7 +43,7 @@ vim "+call dein#update()"
 cd -
 
 # 不要ファイルを削除
-sudo rm -r vimrc fonts installer.sh
+sudo rm -r fonts installer.sh
 
 # P.S.
 # PowerlineとZshのテーマの適用にはターミナルの表示フォントをPowerline専用フォントに変える必要があります
