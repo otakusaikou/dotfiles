@@ -1,0 +1,368 @@
+" プラグイン管理ツールNeoBundleの設定
+" viとの互換性をとらない
+if has('vim_starting')
+    if &compatible
+        set nocompatible
+    endif
+
+    " NeoBundleの位置
+    set runtimepath+=%UserProfile%/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('$HOME/.vim/bundle'))
+
+" NeoBundleの自身をプラグイン管理対象にする
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" かっこいいステータスライン
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
+
+" python PEP8コーディングスタイルチェックプラグイン
+NeoBundle 'nvie/vim-flake8'
+
+" 構文エラーをチェックするプラグイン
+NeoBundle 'kevinw/pyflakes-vim'
+
+" ディレクトリツリーを表示するプラグイン
+NeoBundle 'scrooloose/nerdtree'
+
+" 入力自動補完プラグイン
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'honza/vim-snippets'
+
+" 括弧自動補完プラグイン
+NeoBundle 'jiangmiao/auto-pairs'
+
+" アンドゥツリープラグイン
+NeoBundle 'sjl/gundo.vim'
+
+" コマンドを連続で入力するプラグイン
+NeoBundle 'kana/vim-submode'
+
+" カラーテーマ
+NeoBundle 'altercation/vim-colors-solarized'
+
+call neobundle#end()
+
+" ファイルタイプの対応のプラグイン、インデント設定を自動で検出し、読み込むようにする
+filetype plugin indent on
+
+"====================基本的な設定====================
+"----------履歴保存関係
+" 情報保存の行数を50に限定
+set viminfo='20,\"50
+
+" コマンド,検索履歴の上限値を50に限定
+set history=50
+
+" ファイルを保存するときにアンドゥファイル情報を保存
+set undofile
+
+" アンドゥ情報の保存先
+if !isdirectory(expand('$HOME/.vim/tmp/undo'))
+    call mkdir(expand('$HOME/.vim/tmp/undo'), "p")
+endif
+set undodir=%UserProfile%/.vim/tmp/undo
+
+" バックアップファイルを作らない
+set nobackup
+
+"----------検索関係
+" 一文字入力するたびに一致する候補を絞りこんでいく
+set incsearch
+
+" 検索の時に大文字小文字を区別しない
+set ignorecase
+
+" 検索の結果をハイライト表示
+set hlsearch
+
+"----------インデント
+" タブ入力を複数の空白に置き換える
+set expandtab
+
+" タブ文字が占める空白の幅
+set tabstop=4
+
+" タブキーやバックスペースキーでカーソルが動く幅
+set softtabstop=4
+
+" 自動インデントを有効化
+set autoindent
+
+" 自動インデントの際にずれる空白の幅
+set shiftwidth=4
+
+" 行頭でタブを入力するとshiftwidthで定義した数の空白を入力
+set smarttab
+
+"----------その他
+" コマンドラインのファイル名補完
+set wildmenu
+
+" コマンドラインでの補完を開始するキーをタブキーにする
+set wildchar=<tab>
+
+" エラーメッセージの表示時にビープを鳴らさない
+set visualbell t_vb=
+set noerrorbells
+
+" ヤンクしたテキストをクリップボードにコピー
+set clipboard=unnamed
+
+" 保存されていないファイルがあるときは終了前に保存確認
+" set confirm
+
+" 保存されていないファイルがあるときでも別のファイルを開くことが出来る
+set hidden
+
+"================================================
+
+"====================画面表示関係====================
+" 行番号を表示
+set number
+
+" 画面最下行にカーソルの位置を表示
+set ruler
+
+" カーソル位置の行を常にハイライト表示
+set cursorline
+
+" カーソル位置の列を常にハイライト表示
+set cursorcolumn
+
+" ステータスラインを常に表示
+set laststatus=2
+
+" バックスペースキーでインデントを削除可能にする
+" indent : 行頭の空白
+" eol : 改行
+" start : 挿入モード開始位置より手前の文字
+set backspace=indent,eol,start
+
+" ファイルタイプに応じて構文の色を適用
+syntax enable
+
+"================================================
+
+"=====================エンコード======================
+" 改行コードの設定
+set fileformat=dos
+
+" 改行コード自動判別の順番
+set fileformats=dos,unix,mac
+
+" vim自身の文字コード,グローバルオプション
+set encoding=utf-8
+
+" バッファ保存時に用いる文字コード,バッファローカルオプション
+set fileencoding=utf-8
+
+" ファイルを開く時に用いる文字コード自動判別の順番,開けなかったらencodingで設定した文字コードでファイルを開く,グローバルオプション
+set fileencodings=utf-8,sjis,big5,gbk,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,,cp932,gb2312,euc-kr
+
+" vimのメッセージの言語を英語に変更
+" let $LANG='en_US'
+
+"================================================
+
+"==================キーボードショートカット==================
+" Leaderキー
+let mapleader=";"
+
+" jjを押すと挿入モードから抜ける
+imap jj <esc>
+
+" オムニ補完を行う
+imap <Leader>c <c-x><c-o>
+
+" jjを押すとコマンドラインモードから抜ける
+cno jj <c-c>
+
+" 行頭、行末移動
+nmap <Leader>b 0
+nmap <Leader>e $
+
+" 分割したウィンドウあるいはvimを終了
+nmap <Leader>q :q<CR>
+
+" vimを強制終了
+nmap <Leader>Q :qa!<CR>
+
+" ファイルを保存
+nmap <Leader>w :w<CR>
+
+" すべてのファイルを保存
+nmap <Leader>WQ :wa<CR>:q<CR>
+
+" 下のウィンドウに移動
+map <c-j> <c-w>j
+
+" 上のウィンドウに移動
+map <c-k> <c-w>k
+
+" 右のウィンドウに移動
+map <c-l> <c-w>l
+
+" 左のウィンドウに移動
+map <c-h> <c-w>h
+
+" 分割したウィンドウの拡大と縮小(プラグインvim-submodeが必要)
+" 分割ウィンドウの幅を増やす
+call submode#enter_with('winsize', 'n', '', '<C-w>L', '<C-w>>')
+call submode#map('winsize', 'n', '', 'L', '<C-w>>')
+
+" 分割ウィンドウの幅を減らす
+call submode#enter_with('winsize', 'n', '', '<C-w>H', '<C-w><')
+call submode#map('winsize', 'n', '', 'H', '<C-w><')
+
+" 分割ウィンドウの高さを増やす
+call submode#enter_with('winsize', 'n', '', '<C-w>K', '<C-w>-')
+call submode#map('winsize', 'n', '', 'K', '<C-w>-')
+
+" 分割ウィンドウの高さを減らす
+call submode#enter_with('winsize', 'n', '', '<C-w>J', '<C-w>+')
+call submode#map('winsize', 'n', '', 'J', '<C-w>+')
+
+" ディレクトリツリーを開く/閉じる
+map <Leader>n :NERDTreeToggle<CR>
+
+" アンドゥツリーを開く/閉じる
+nnoremap <F5> :GundoToggle<CR>
+
+" 次のバッファに切り替える
+map <Leader>a :bn<cr>
+
+" 前のバッファに切り替える
+map <Leader>s :bp<cr>
+
+" 今のバッファを削除
+map <Leader>d :bw<cr>
+
+" vimrcの再読み込み
+map <Leader>r :so $MYVIMRC<CR>
+
+" vimrcを開ける
+map <Leader>rc :e $MYVIMRC<CR>
+
+" gvimrcを開ける
+map <Leader>rgc :e $MYGVIMRC<CR>
+
+" pythonスクリプトの実行
+autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python %<CR>
+
+" Javaプログラムをコンパイル
+autocmd FileType java :map <F8> :!javac %<CR>
+
+" コンパイルされたJavaプログラムを実行
+autocmd FileType java :map <F9> :!java %<<CR>
+
+" Cプログラムをコンパイル
+autocmd FileType c :map <F8> :!make clean<CR>:!make<CR>
+
+" コンパイルされたCプログラムを実行
+autocmd FileType c :map <F9> :!./%<<CR>
+
+"================================================
+
+"====================プラグィン関係====================
+"----------vim-flake8
+" コーディングスタイルエラーを行番号にマーク
+let g:flake8_show_in_gutter=1
+
+" コーディングスタイルエラーをハイライト表示
+let g:flake8_show_in_file=1
+
+" ハイライトグループを指定する
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
+
+"----------pyflakes-vim
+" pyflakes-vimのquickfix機能を無効化
+let g:pyflakes_use_quickfix = 0
+
+"----------vim-airline
+let g:airline#extensions#tabline#enabled=1
+"let g:airline_powerline_fonts=1
+
+" airlineのテーマ
+let g:airline_theme='base16'
+
+"----------neocomplete
+" neocompleteを有効化
+let g:neocomplete#enable_at_startup = 1
+
+" 大文字と小文字を区別しない
+let g:neocomplete#enable_smart_case = 1
+
+" シンタックスをキャッシュするときの最小文字数を3にする
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" 辞書を指定する
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" 日本語のキーワードパターンを無視
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" 自動補完のキーボードショートカット
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Enterキーでポップアップメニューを閉じ、改行する
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+
+" タブキーでメニューの項目間を移動
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Ctrl+hあるいは後退キーでポップアップメニューを閉じ、1文字を削除
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" オムニ補完の設定
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete completeopt-=preview
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
+
+"----------neosnippet
+" Ctrl+kキーで自動補完
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" タブキーで自動補完
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" 暗黙化された文字の対応に関する設定
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+"----------vim-snippets
+" snipMateとの互換性を有効化
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" snipMate用スニペット集の場所を指定
+let g:neosnippet#snippets_directory=expand('$HOME/.vim/bundle/vim-snippets/snippets')
+
+"================================================
