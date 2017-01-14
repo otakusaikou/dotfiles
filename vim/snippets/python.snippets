@@ -243,3 +243,16 @@ snippet matp
 	import matplotlib.pyplot as plt
 snippet nump
 	import numpy as np
+snippet npsave
+	np.savetxt(
+		"${0:result}.txt",
+		${1},
+		fmt="${2}",
+		header="${3}",
+		comments='')
+snippet pand
+	import pandas as pd
+snippet pdread
+	${0:data} = pd.read_csv(
+		"${1:input}.txt",
+		delimiter=' ')
