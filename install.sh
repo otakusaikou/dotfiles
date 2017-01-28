@@ -22,6 +22,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 cp ./zsh/.zshrc ~
 
+# Tmuxのステータスバー専用のスクリプトをダウンロード (macOSのみ対応)
+# 詳しい説明はこちら -> https://goo.gl/8mGtk1
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # バッテリ残量を取得するスクリプト
+    sudo wget -O /usr/local/bin/battery "https://github.com/b4b4r07/dotfiles/blob/master/.tmux/bin/battery?raw=true"
+    sudo chmod 755 /usr/local/bin/battery
+
+    # SSIDを取得するスクリプト
+    sudo wget -O /usr/local/bin/wifi "https://github.com/b4b4r07/dotfiles/blob/master/.tmux/bin/wifi?raw=true"
+    sudo chmod 755 /usr/local/bin/wifi
+fi
+
 # VimプラグインPowerline用のフォント
 git clone https://github.com/powerline/fonts
 sudo ./fonts/install.sh
