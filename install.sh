@@ -26,6 +26,15 @@ cp ./zsh/.zshrc ~
 git clone https://github.com/powerline/fonts
 sudo ./fonts/install.sh
 
+# コーディング用のかっこいいフォント- FiraCode
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    mkdir -p ~/.local/share/fonts
+    for type in Bold Light Medium Regular Retina; do wget -O ~/.local/share/fonts/FiraCode-$type.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-$type.ttf?raw=true"; done
+    sudo fc-cache -f
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    brew tap caskroom/fonts
+    brew cask install font-fira-code
+
 # Vim設定ファイルをコピー
 touch ~/.viminfo
 cp ./vim/UNIX/.vimrc ~
@@ -46,6 +55,6 @@ cd -
 sudo rm -r fonts installer.sh
 
 # P.S.
-# PowerlineとZshのテーマの適用にはターミナルの表示フォントをPowerline専用フォントに変える必要があります
+# PowerlineとZshのテーマの適用にはターミナルの表示フォントをPowerline専用フォント(あるいはFiraCode)に変える必要があります
 # また、メタキーを正しく動作させるにはメニューアクセスのショートカットキーを無効に(LINUX)、
 # あるいはメタキーとしての機能を有効にしてください(macOS)
