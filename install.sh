@@ -1,9 +1,10 @@
 #!/bin/bash
 # Vimのアプグレード & 必要なパッケージのインストール
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    sudo add-apt-repository ppa:jonathonf/vim
+    sudo apt-get --yes install software-properties-common
+    sudo add-apt-repository --yes ppa:jonathonf/vim
     sudo apt update
-    sudo apt-get install vim vim-gnome vim-gtk python-flake8 pep8 pyflakes git cmake tmux zsh build-essential python2.7-dev curl
+    sudo apt-get install --yes vim vim-gnome vim-gtk python-flake8 pep8 pyflakes git cmake tmux zsh build-essential python2.7-dev curl
     sudo pip install pyopenssl -U
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -46,6 +47,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew tap caskroom/fonts
     brew cask install font-fira-code
+fi
 
 # Vim設定ファイルをコピー
 touch ~/.viminfo
