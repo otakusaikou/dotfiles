@@ -37,7 +37,7 @@ fi
 
 # VimプラグインPowerline用のフォント
 git clone https://github.com/powerline/fonts
-sudo ./fonts/install.sh
+./fonts/install.sh
 
 # コーディング用のかっこいいフォント- FiraCode
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
