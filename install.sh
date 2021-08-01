@@ -8,8 +8,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo pip install pyopenssl -U
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install vim flake8 git cmake tmux zsh reattach-to-user-namespace
-    pip install pyopenssl -U
+    brew install vim git cmake tmux zsh reattach-to-user-namespace
+    pip3 install flake8 pyopenssl -U
 fi
 
 # プラグインマネージャdeinのインストール先
@@ -64,6 +64,10 @@ cd $DEIN_HOME/repos/github.com/Valloric/YouCompleteMe
 ./install.py --clang-completer
 vim "+call dein#update()"
 cd -
+
+# プラグインを再キャッシュし設定変更を反映させる
+vim "+call map(dein#check_clean(), \"delete(v:val, 'rf')\")"
+vim "+call dein#recache_runtimepath()"
 
 # 不要ファイルを削除
 sudo rm -r fonts installer.sh
