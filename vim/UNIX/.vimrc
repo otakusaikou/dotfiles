@@ -22,7 +22,7 @@ call dein#add('vim-airline/vim-airline-themes')
 call dein#add('nvie/vim-flake8')
 
 " 構文エラーをチェックするプラグイン
-call dein#add('kevinw/pyflakes-vim')
+" call dein#add('kevinw/pyflakes-vim')
 
 " ディレクトリツリーを表示するプラグイン
 call dein#add('scrooloose/nerdtree')
@@ -343,7 +343,7 @@ highlight link Flake8_PyFlake    WarningMsg
 
 "----------pyflakes-vim
 " pyflakes-vimのquickfix機能を無効化
-let g:pyflakes_use_quickfix=0
+" let g:pyflakes_use_quickfix=0
 
 "----------vim-airline
 let g:airline#extensions#tabline#enabled=1
