@@ -4,11 +4,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt-get --yes install software-properties-common
     sudo add-apt-repository --yes ppa:jonathonf/vim
     sudo apt update
-    sudo apt-get install --yes vim vim-gnome vim-gtk python-flake8 pep8 pyflakes git cmake tmux zsh build-essential python2.7-dev curl
-    sudo pip install pyopenssl -U
+    sudo apt-get install --yes build-essential cmake curl git python3-dev python3-pip vim vim-gtk vim-nox tmux zsh
+    sudo pip3 install flake8 pyopenssl -U
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install vim git cmake tmux zsh reattach-to-user-namespace
+    brew install cmake git reattach-to-user-namespace tmux vim zsh
     pip3 install flake8 pyopenssl -U
 fi
 
