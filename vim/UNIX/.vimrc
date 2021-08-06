@@ -308,7 +308,7 @@ map <Leader>rc :e $MYVIMRC<CR>
 map <Leader>rgc :e $MYGVIMRC<CR>
 
 " pythonスクリプトの実行
-autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python %<CR>
+autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python3 %<CR>
 
 " flake8でpythonコーディングスタイルチェックを実行
 autocmd BufNewFile,BufRead *.py map <leader>c :call flake8#Flake8()<CR>
