@@ -245,6 +245,12 @@ nmap <Leader>w :w<CR>
 " すべてのファイルを保存
 nmap <Leader>WQ :wa<CR>:q<CR>
 
+" ペーストモードに切り替え
+nmap <Leader>p :set paste<CR>
+
+" ペーストモードを無効にする
+nmap <Leader>np :set nopaste<CR>
+
 " 下のウィンドウに移動
 map <c-j> <c-w>j
 
@@ -280,6 +286,9 @@ map <Leader>n :NERDTreeToggle<CR>
 " アンドゥツリーを開く/閉じる
 nnoremap <F5> :UndotreeToggle<CR>
 
+" 末尾の無駄なスペースを自動削除
+nnoremap <silent> <F6> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " 次のバッファに切り替える
 map <Leader>a :bn<cr>
 
@@ -300,6 +309,10 @@ map <Leader>rgc :e $MYGVIMRC<CR>
 
 " pythonスクリプトの実行
 autocmd BufNewFile,BufRead *.py map <F9> :w<CR>:!python %<CR>
+
+" flake8でpythonコーディングスタイルチェックを実行
+autocmd BufNewFile,BufRead *.py map <leader>c :call flake8#Flake8()<CR>
+autocmd BufNewFile,BufRead *.py map <leader>C :call flake8#Flake8UnplaceMarkers()<CR>
 
 " Javaプログラムをコンパイル
 autocmd FileType java :map <F8> :!javac %<CR>
