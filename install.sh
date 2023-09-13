@@ -4,12 +4,12 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt-get --yes install software-properties-common
     sudo add-apt-repository --yes ppa:jonathonf/vim
     sudo apt update
-    sudo apt-get install --yes build-essential cmake curl git python3-dev python3-pip vim vim-gtk vim-nox tmux zsh
-    sudo pip3 install flake8 pyopenssl -U
+    sudo apt-get install --yes build-essential cmake curl git python3-dev python3-pip vim vim-gtk3 vim-nox tmux zsh
+    sudo pip3 install flake8 pyopenssl -U --break-system-packages
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install cmake git reattach-to-user-namespace tmux vim zsh
-    pip3 install flake8 pyopenssl -U
+    pip3 install flake8 pyopenssl -U --break-system-packages
 fi
 
 # プラグインマネージャdeinのインストール先
@@ -49,13 +49,15 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew cask install font-fira-code
 fi
 
+# Vim Deinプラグインの設定
+curl https://raw.githubusercontent.com/Shougo/dein-installer.vim/master/installer.sh > installer.sh
+sh ./installer.sh --overwrite-config --use-vim-config $DEIN_HOME
+
 # Vim設定ファイルをコピー
 touch ~/.viminfo
 cp ./vim/UNIX/.vimrc ~
 
 # Vimプラグインのインストール
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh $DEIN_HOME
 vim "+call dein#install()"
 cp ./vim/snippets/*.snippets $DEIN_HOME/repos/github.com/honza/vim-snippets/snippets
 

@@ -1,18 +1,23 @@
-" プラグイン管理ツールNeoBundleの設定
-" viとの互換性をとらない
-if has('vim_starting')
-    if &compatible
-        set nocompatible
-    endif
+" vi非互換モードに設定
+set nocompatible
 
-    " Deinの位置
-    set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
-endif
+" Dein ベースを設定 (必須)
+let s:dein_base = '/usr/local/google/home/scottlschen/.vim/dein'
 
-call dein#begin(expand('$HOME/.vim/dein'))
+" Dein ソースを設定 (必須)
+let s:dein_src = '/usr/local/google/home/scottlschen/.vim/dein/repos/github.com/Shougo/dein.vim'
 
-" Deinをプラグイン管理対象にする
-call dein#add('Shougo/dein.vim')
+" Dein 実行パスを設定 (必須)
+execute 'set runtimepath+=' . s:dein_src
+
+" Deinの初期化 (必須)
+call dein#begin(s:dein_base)
+
+call dein#add(s:dein_src)
+
+" ここからプラグインを指定していく
+"call dein#add('Shougo/neosnippet.vim')
+"call dein#add('Shougo/neosnippet-snippets')
 
 " かっこいいステータスライン
 call dein#add('vim-airline/vim-airline')
@@ -46,11 +51,19 @@ call dein#add('kana/vim-submode')
 " カラーテーマ
 call dein#add('altercation/vim-colors-solarized')
 
+" Deinの初期化完了 (必須)
 call dein#end()
 
 " ファイルタイプの対応のプラグイン、インデント設定を自動で検出し、読み込むようにする
-filetype plugin indent on
+if has('filetype')
+  filetype indent plugin on
+endif
 
+" 起動時にインストールされていないプラグインをインストールする場合は、コメントを外してください
+"if dein#check_install()
+" call dein#install()
+"endif
+"
 "====================基本的な設定====================
 "----------履歴保存関係
 " 情報保存の行数を50に限定
@@ -392,6 +405,9 @@ let g:ycm_complete_in_comments=1
 
 " 左側のガーターエリアを隠す
 let g:ycm_enable_diagnostic_signs=0
+
+" 関数補完の後、自動的に説明プレビューウィンドウを閉じる
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 "----------Ultisnips
 " YCMとの衝突を解決
